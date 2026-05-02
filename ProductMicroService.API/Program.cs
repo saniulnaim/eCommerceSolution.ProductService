@@ -18,12 +18,35 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+// Add Swagger Service
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// To communicate clint, enable cores
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 app.UseExceptionHandlingMiddleware();
 app.UseRouting();
 
+// To communicate clint, enable cores
+app.UseCors();
+
+// Swagger
+app.UseSwagger();
+app.UseSwaggerUI();
+
 // Auth
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
