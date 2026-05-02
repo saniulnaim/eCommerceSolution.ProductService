@@ -1,6 +1,7 @@
 using DataAccessLayer;
 using BusinessLogicLayer;
 using ProductMicroService.API.Middleware;
+using ProductMicroService.API.APIEndpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapProductAPIEndpoints();
 
 app.Run();
 
