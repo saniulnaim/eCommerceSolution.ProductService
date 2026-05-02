@@ -8,7 +8,7 @@ namespace DataAccessLayer.RepositoryContacts
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetProducts();
+        Task<IEnumerable<Product>> GetProducts();
 
         Task<IEnumerable<Product?>> GetProductsByCondition(Expression<Func<Product, bool>> condition);
 

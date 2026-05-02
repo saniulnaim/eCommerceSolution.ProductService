@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BusinessLogicLayer.Validators
 {
-    public class ProductUpdateRequestValidator : AbstractValidator<ProductUpdateequest>
+    public class ProductUpdateRequestValidator : AbstractValidator<ProductUpdateRequest>
     {
         public ProductUpdateRequestValidator()
         {
