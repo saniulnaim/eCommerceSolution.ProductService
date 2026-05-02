@@ -1,4 +1,6 @@
 ﻿using DataAccessLayer.Context;
+using DataAccessLayer.Repositories;
+using DataAccessLayer.RepositoryContacts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,8 @@ namespace DataAccessLayer
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddScoped<IProductRepository, ProductRepository>();
             return services;
         }
     }
