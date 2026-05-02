@@ -25,9 +25,9 @@ namespace ProductMicroService.API.APIEndpoints
             // GET /api/products/search/xxxxx
             app.MapGet("/api/products/search/{SearchString}", async (IProductService productService, string SearchString) =>
             {
-                List<ProductResponse?> productsByProductName = await productService.GetProductsByCondition(p => p.ProductName != null && p.ProductName.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
+                List<ProductResponse?> productsByProductName = await productService.GetProductsByCondition(p => p.ProductName != null && p.ProductName.Contains(SearchString));
 
-                List<ProductResponse?> productsByCategory = await productService.GetProductsByCondition(p => p.Category != null && p.Category.Contains(SearchString, StringComparison.OrdinalIgnoreCase));
+                List<ProductResponse?> productsByCategory = await productService.GetProductsByCondition(p => p.Category != null && p.Category.Contains(SearchString));
 
                 var products = productsByProductName.Union(productsByCategory);
                 return Results.Ok(products);
