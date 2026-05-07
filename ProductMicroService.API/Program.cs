@@ -3,6 +3,7 @@ using BusinessLogicLayer;
 using ProductMicroService.API.Middleware;
 using ProductMicroService.API.APIEndpoints;
 using System.Text.Json.Serialization;
+using DataAccessLayer.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,13 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// Auto-create database tables at startup (no migrations needed)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.EnsureCreated();
+}
 
 app.UseExceptionHandlingMiddleware();
 app.UseRouting();

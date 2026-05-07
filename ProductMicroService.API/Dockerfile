@@ -27,4 +27,7 @@ RUN dotnet publish "./ProductMicroService.API.csproj" -c $BUILD_CONFIGURATION -o
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV POSTGRES_HOST=postgres
+ENV POSTGRES_PASSWORD=Admin123@
+ENV POSTGRES_DB=eCommerceProducts
 ENTRYPOINT ["dotnet", "ProductMicroService.API.dll"]
